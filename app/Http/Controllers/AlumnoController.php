@@ -14,7 +14,8 @@ class AlumnoController extends Controller
      */
     public function index()
     {
-        //
+        $alumnos=Alumno::orderBy('apellidos')->paginate(5);
+        return view('alumnos.aindex', compact('alumnos'));
     }
 
     /**
@@ -46,7 +47,7 @@ class AlumnoController extends Controller
      */
     public function show(Alumno $alumno)
     {
-        //
+        return view('alumnos.detalles', compact('alumno'));
     }
 
     /**
@@ -81,5 +82,11 @@ class AlumnoController extends Controller
     public function destroy(Alumno $alumno)
     {
         //
+    }
+
+    ### mis métodos
+    public function asignaturasAlumno(Alumno $alumno){
+        $asignaturas=$alumno->asignaturas()->get();
+        return view('matriculas.modulosalumno', compact('asignaturas', 'alumno'));
     }
 }

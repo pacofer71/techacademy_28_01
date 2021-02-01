@@ -23,7 +23,7 @@ class AlumnoFactory extends Factory
     {
         return [
             'nombre'=>$this->faker->firstName(),
-            'apellidos'=>$this->faker->lastName().", ".$this->faker->lastName(),
+            'apellidos'=>$this->faker->lastName()." ".$this->faker->lastName(),
             'mail'=>$this->faker->unique()->email
 
         ];

@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 Route::resource('alumnos', AlumnoController::class);
 Route::resource('asignaturas', AsignaturaController::class);
+
+Route::get('matriculas/{alumno}', 'App\Http\Controllers\AlumnoController@asignaturasAlumno')->name('matriculas.asignaturasalumno');
