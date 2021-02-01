@@ -17,7 +17,6 @@ class CreateAsignaturasTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->integer('horas')->unsigned();
-            $table->text('descripcion')->nullable();
             $table->timestamps();
         });
     }

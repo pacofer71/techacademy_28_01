@@ -22,7 +22,10 @@ class AlumnoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre'=>$this->faker->firstName(),
+            'apellidos'=>$this->faker->lastName().", ".$this->faker->lastName(),
+            'mail'=>$this->faker->unique()->email
+
         ];
     }
 }
