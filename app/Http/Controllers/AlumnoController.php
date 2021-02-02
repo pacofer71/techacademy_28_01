@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Alumno;
+use App\Models\{Alumno, Asignatura};
 use Illuminate\Http\Request;
 
 class AlumnoController extends Controller
@@ -88,5 +88,22 @@ class AlumnoController extends Controller
     public function asignaturasAlumno(Alumno $alumno){
         $asignaturas=$alumno->asignaturas()->get();
         return view('matriculas.modulosalumno', compact('asignaturas', 'alumno'));
+    }
+
+    public function borrarMatricula(Alumno $alumno, Asignatura $asignatura){
+        $alumno->asignaturas()->detach($asignatura->id);
+        return redirect()->back()->with('mensaje', "Matrícula Borrarda Correctamente");
+
+    }
+    public function editarMatricula(Alumno $alumno, Asignatura $asignatura){
+        return view('matriculas.medit', compact('alumno', 'asignatura'));
+
+    }
+    public function updateMatricula(Request $request, Alumno $alumno, Asignatura $asignatura){
+        $request->validate([
+            'nota'=>['required']
+        ]);
+        $alumno->asignaturas()->updateExistingPivot($asignatura->id, ['nota'=>$request->nota]);
+        return redirect()->route('matriculas.asignaturasalumno', $alumno)->with('mensaje', 'Nota Modificada');
     }
 }
