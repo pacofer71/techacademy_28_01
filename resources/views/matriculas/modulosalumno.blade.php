@@ -10,7 +10,7 @@
     @if ($texto = Session::get('mensaje'))
         <p class="bg-blue-400 text-white p-2 my-3 font-bold">{{ $texto }}</p>
     @endif
-    <a href="#" class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow text-xs">
+    <a href="{{route('matriculas.create', $alumno)}}" class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow text-xs">
         <i class="fa fa-plus"></i> Nueva Asignatura</a>
     <div class="text-center grid grid-cols-6 py-2 gap-2 mt-10 border-2 border-blue-200 shadow">
         <div class="font-bold text-base text-gray-700">Código</div>

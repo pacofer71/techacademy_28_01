@@ -6,9 +6,26 @@ Alumnos
 Gestión de Alumnos
 @endsection
 @section('contenido')
+<div class="grid grid-cols-2 gap-5 py-2">
+    <div class="py-2">
 <a href="{{route('alumnos.create')}}"
             class="bg-green-600 hover:bg-green-800 rounded text-white font-bold py-2 px-4 shadow">
             <i class="fa fa-plus"></i> Nuevo Alumno</a>
+    </div>
+    <div class="py-2 text-right ">
+        <form name="search" action="{{route('alumnos.index')}}">
+            <i class="fa fa-search"></i>
+            <span class="font-bold text-gray-700 mx-2">Apellidos:</span>
+            <select name="apellidos" class="form-select mx-2" onchange="this.form.submit()">
+                <option value="%">Todos</option>
+                <option value="1" @if($selectOption=='1') selected @endif>A~F</option>
+                <option value="2" @if($selectOption=='2') selected @endif>G~L</option>
+                <option value="3" @if($selectOption=='3') selected @endif>M~R</option>
+                <option value="4" @if($selectOption=='4') selected @endif>S~Z</option>
+            </select>
+        </form>
+    </div>
+</div>
 <div class="text-center grid grid-cols-5 py-2 gap-2 mt-10 border-2 border-blue-200 shadow">
     <div class="font-bold text-xl text-gray-700">Detalle</div>
     <div class="font-bold text-xl text-gray-700">Nombre</div>

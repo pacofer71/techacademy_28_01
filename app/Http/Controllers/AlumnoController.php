@@ -12,10 +12,15 @@ class AlumnoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $alumnos=Alumno::orderBy('apellidos')->paginate(5);
-        return view('alumnos.aindex', compact('alumnos'));
+        $alumnos=Alumno::orderBy('apellidos')
+        ->apellidos($request->get('apellidos'))
+        ->paginate(5)->withQueryString();
+
+        $selectOption = $request->apellidos;
+
+        return view('alumnos.aindex', compact('alumnos', 'selectOption'));
     }
 
     /**
@@ -106,4 +111,22 @@ class AlumnoController extends Controller
         $alumno->asignaturas()->updateExistingPivot($asignatura->id, ['nota'=>$request->nota]);
         return redirect()->route('matriculas.asignaturasalumno', $alumno)->with('mensaje', 'Nota Modificada');
     }
+
+    public function createMatricula(Alumno $alumno){
+        $asignaturas=$alumno->asignaturasOut();
+        $total=$asignaturas->count();
+
+        return view('matriculas.create', compact('alumno', 'asignaturas', 'total'));
+    }
+    public function storeMatricula(Request $request){
+            $alumno=Alumno::find($request->alumno_id);
+            if(is_array($request->misAsignaturas)){
+                foreach($request->misAsignaturas as $id){
+                    $alumno->asignaturas()->attach($id);
+                }
+            }
+            return redirect()->route('matriculas.asignaturasalumno', $alumno)->with('mensaje', 'Matrícula/s realizada/s');
+
+    }
+    //---------------------------------------------------------------------------------------------------
 }

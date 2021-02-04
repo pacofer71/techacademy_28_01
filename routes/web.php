@@ -29,3 +29,9 @@ Route::get('matriculas/{alumno}{asignatura}/edit', 'App\Http\Controllers\AlumnoC
     ->name('matriculas.edit');
 Route::put('matriculas/{alumno}{asignatura}', 'App\Http\Controllers\AlumnoController@updateMatricula')
     ->name('matriculas.update');
+
+Route::get('matriculas/{alumno}/create', 'App\Http\Controllers\AlumnoController@createMatricula')
+    ->name('matriculas.create');
+
+Route::post('matriculas', 'App\Http\Controllers\AlumnoController@storeMatricula')
+    ->name('matriculas.store');
