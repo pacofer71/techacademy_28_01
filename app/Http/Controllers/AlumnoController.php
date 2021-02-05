@@ -109,6 +109,7 @@ class AlumnoController extends Controller
             'nota'=>['required']
         ]);
         $alumno->asignaturas()->updateExistingPivot($asignatura->id, ['nota'=>$request->nota]);
+        
         return redirect()->route('matriculas.asignaturasalumno', $alumno)->with('mensaje', 'Nota Modificada');
     }
 

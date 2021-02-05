@@ -22,6 +22,10 @@ Route::resource('asignaturas', AsignaturaController::class);
 
 Route::get('matriculas/{alumno}', 'App\Http\Controllers\AlumnoController@asignaturasAlumno')
     ->name('matriculas.asignaturasalumno');
+
+    Route::get('matriculas1/{asignatura}', 'App\Http\Controllers\AsignaturaController@alumnosAsignatura')
+    ->name('matriculas.alumnosasignatura');
+
 Route::delete('matriculas/{alumno}{asignatura}', 'App\Http\Controllers\AlumnoController@borrarMatricula')
     ->name('matriculas.borrar');
 

@@ -14,7 +14,9 @@ class AsignaturaController extends Controller
      */
     public function index()
     {
-        //
+        $asignaturas=Asignatura::orderBy('nombre')->paginate(6);
+        return view('asignaturas.asigindex', compact('asignaturas'));
+
     }
 
     /**
@@ -46,7 +48,7 @@ class AsignaturaController extends Controller
      */
     public function show(Asignatura $asignatura)
     {
-        //
+        return view('asignaturas.show', compact('asignatura'));
     }
 
     /**
@@ -81,5 +83,11 @@ class AsignaturaController extends Controller
     public function destroy(Asignatura $asignatura)
     {
         //
+    }
+
+    //--------------------------------------------------------------
+    public function alumnosAsignatura(Asignatura $asignatura){
+        $alumnos=$asignatura->alumnos()->orderBy('apellidos')->paginate(5);
+        return view('matriculas.alumnosxmodulo', compact('alumnos', 'asignatura'));
     }
 }
