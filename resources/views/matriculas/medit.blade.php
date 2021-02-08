@@ -6,7 +6,7 @@ Editar Matricula
 Alumno: {{$alumno->apellidos.", ".$alumno->nombre}} [{{$asignatura->nombre}}]
 @endsection
 @section('contenido')
-<form method="POST" action="{{route('matriculas.update', [$alumno, $asignatura])}}" name="s">
+<form method="POST" action="{{route('matriculas.update', [$alumno, $asignatura, $token])}}" name="s">
     @csrf
     @method('PUT')
     <label class="block">

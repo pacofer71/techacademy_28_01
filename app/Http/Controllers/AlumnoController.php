@@ -100,17 +100,20 @@ class AlumnoController extends Controller
         return redirect()->back()->with('mensaje', "Matrícula Borrarda Correctamente");
 
     }
-    public function editarMatricula(Alumno $alumno, Asignatura $asignatura){
-        return view('matriculas.medit', compact('alumno', 'asignatura'));
+    public function editarMatricula(Alumno $alumno, Asignatura $asignatura, int $token){
+        return view('matriculas.medit', compact('alumno', 'asignatura', 'token'));
 
     }
-    public function updateMatricula(Request $request, Alumno $alumno, Asignatura $asignatura){
+    public function updateMatricula(Request $request, Alumno $alumno, Asignatura $asignatura, int $token){
+        //dd($token);
         $request->validate([
             'nota'=>['required']
         ]);
         $alumno->asignaturas()->updateExistingPivot($asignatura->id, ['nota'=>$request->nota]);
-        
-        return redirect()->route('matriculas.asignaturasalumno', $alumno)->with('mensaje', 'Nota Modificada');
+
+        return  ($token==1) ? redirect()->route('matriculas.asignaturasalumno', $alumno)->with('mensaje', 'Nota cambiada') :
+            redirect()->route('matriculas.alumnosasignatura', $asignatura)->with('mensaje', "Nota modificada");
+
     }
 
     public function createMatricula(Alumno $alumno){

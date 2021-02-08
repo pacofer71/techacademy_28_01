@@ -29,9 +29,9 @@ Route::get('matriculas/{alumno}', 'App\Http\Controllers\AlumnoController@asignat
 Route::delete('matriculas/{alumno}{asignatura}', 'App\Http\Controllers\AlumnoController@borrarMatricula')
     ->name('matriculas.borrar');
 
-Route::get('matriculas/{alumno}{asignatura}/edit', 'App\Http\Controllers\AlumnoController@editarMatricula')
+Route::get('matriculas/{alumno}{asignatura}{token}/edit', 'App\Http\Controllers\AlumnoController@editarMatricula')
     ->name('matriculas.edit');
-Route::put('matriculas/{alumno}{asignatura}', 'App\Http\Controllers\AlumnoController@updateMatricula')
+Route::put('matriculas/{alumno}{asignatura}{token}', 'App\Http\Controllers\AlumnoController@updateMatricula')
     ->name('matriculas.update');
 
 Route::get('matriculas/{alumno}/create', 'App\Http\Controllers\AlumnoController@createMatricula')
@@ -39,3 +39,10 @@ Route::get('matriculas/{alumno}/create', 'App\Http\Controllers\AlumnoController@
 
 Route::post('matriculas', 'App\Http\Controllers\AlumnoController@storeMatricula')
     ->name('matriculas.store');
+
+
+Route::get('matriculas1/{asignatura}/create', 'App\Http\Controllers\AsignaturaController@createMatricula')
+    ->name('matriculas1.create');
+
+Route::post('matriculas1', 'App\Http\Controllers\AsignaturaController@storeMatricula')
+    ->name('matriculas1.store');

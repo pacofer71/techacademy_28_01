@@ -20,6 +20,7 @@
         <div class="font-bold text-base text-gray-700 col-span-2 text-center">Acciones</div>
     </div>
     <div class="text-center grid grid-cols-6 py-2 gap-2 mt-10 border-2 border-blue-200 shadow align-middle text-xs">
+        @php $token=1 @endphp
         @foreach ($asignaturas as $asignatura)
             @php
             $color = $asignatura->pivot->nota < 5 ? 'text-red-600' : 'text-green-700'; @endphp
@@ -36,7 +37,8 @@
                 {{ $asignatura->pivot->created_at }}
             </div>
             <div class="p-2">
-                <a href="{{ route('matriculas.edit', [$alumno, $asignatura]) }}"
+
+                <a href="{{ route('matriculas.edit', [$alumno, $asignatura, $token]) }}"
                     class="bg-purple-400 hover:bg-purple-600 rounded text-white font-bold py-2 px-4 shadow">
                     <i class="fas fa-edit"></i> Calificar</a>
             </div>

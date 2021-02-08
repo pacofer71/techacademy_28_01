@@ -15,4 +15,12 @@ class Asignatura extends Model
          ->withPivot('nota')
          ->withTimestamps();
     }
+
+    //devolverá los alumnos que NO tienen la asignatura en cuestión
+    public function alumnosOut(){
+        $misalumnos = $this->alumnos()->pluck('alumnos.id');
+        $alumnosSin = Alumno::whereNotIn('id', $misalumnos)->orderBy('apellidos');
+        return $alumnosSin;
+
+    }
 }
